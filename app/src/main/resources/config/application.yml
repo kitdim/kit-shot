@@ -1,6 +1,8 @@
 spring:
   application:
     name: app
+  profiles:
+    active: ${APP_ENV:dev}
   jpa:
     open-in-view: false
     hibernate:
