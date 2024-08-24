@@ -15,7 +15,8 @@ public class Link {
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
-    private String name;
+    private String shortName;
+    private String originalName;
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 }

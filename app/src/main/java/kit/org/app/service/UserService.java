@@ -24,6 +24,10 @@ public class UserService {
                 .toList();
     }
 
+    public UserShow getById(Long id) {
+        return userMapper.toShowUser(userRepository.findById(id).orElseThrow());
+    }
+
     public void save(UserCreate user) {
         userRepository.save(userMapper.toUser(user));
     }

@@ -4,6 +4,7 @@ import kit.org.app.dto.user.UserCreate;
 import kit.org.app.dto.user.UserShow;
 import kit.org.app.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping(name = "api/users/")
 @RequiredArgsConstructor
-public class UserController {
+public class  UserController {
     private final UserService userService;
 
     @GetMapping(path = "")
@@ -24,7 +25,14 @@ public class UserController {
                 .body(users);
     }
 
+    @GetMapping(path = "{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public UserShow getById(Long id) {
+        return userService.getById(id);
+    }
+
     @PostMapping(path = "")
+    @ResponseStatus(HttpStatus.CREATED)
     public UserCreate save(@RequestBody UserCreate user) {
         userService.save(user);
         return user;
