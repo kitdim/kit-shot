@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "api/users/")
+@RequestMapping("api/users/")
 @RequiredArgsConstructor
 public class  UserController {
     private final UserService userService;
@@ -27,7 +27,7 @@ public class  UserController {
 
     @GetMapping(path = "{id}")
     @ResponseStatus(HttpStatus.OK)
-    public UserShow getById(Long id) {
+    public UserShow getById(@PathVariable Long id) {
         return userService.getById(id);
     }
 

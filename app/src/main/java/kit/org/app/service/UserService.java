@@ -24,6 +24,7 @@ public class UserService {
                 .toList();
     }
 
+    @Transactional
     public UserShow getById(Long id) {
         return userMapper.toShowUser(userRepository.findById(id).orElseThrow());
     }

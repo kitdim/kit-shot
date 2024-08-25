@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class LinkUtil {
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Named("getUserFromUtil")
     public User getUserFromUtil(Long userId) {

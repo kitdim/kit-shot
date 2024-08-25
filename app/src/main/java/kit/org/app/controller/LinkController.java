@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(name = "api/link/")
+@RequestMapping("api/users/")
 @RequiredArgsConstructor
 public class LinkController {
     private final LinkService linkService;
 
-    //TODO Дописать методы POST И GET
-    @GetMapping("id")
-    public ResponseEntity<List<LinkShow>> getAllLinksByID(Long userId) {
+    @GetMapping("{userId}/links")
+    public ResponseEntity<List<LinkShow>> getAllLinksByID(@PathVariable Long userId) {
         List<LinkShow> links = linkService.getAllById(userId);
         return ResponseEntity
                 .ok()
@@ -26,9 +25,9 @@ public class LinkController {
                 .body(links);
     }
 
-    @PostMapping("id")
+    @PostMapping("{userId}/links/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody LinkCreate link, Long userId) {
+    public void save(@RequestBody LinkCreate link) {
         linkService.saveByUserId(link);
     }
 }

@@ -15,5 +15,6 @@ public interface LinkMapper {
     @Mapping(target = "shortName", source = "userType", qualifiedByName = {"LinkUtil", "getShortName"})
     @Mapping(target = "user", source = "userId", qualifiedByName = {"LinkUtil", "getUserFromUtil"})
     Link toLink(LinkCreate dto);
+    @Mapping(target = "name", source = "shortName")
     LinkShow toShowLink(Link link);
 }

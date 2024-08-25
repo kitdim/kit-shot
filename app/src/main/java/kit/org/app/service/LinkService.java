@@ -16,7 +16,7 @@ public class LinkService {
     private final LinkMapper linkMapper;
 
     public List<LinkShow> getAllById(Long userId) {
-      return linkRepository.findById(userId).stream()
+      return linkRepository.findAllByUserId(userId).stream()
               .map(linkMapper::toShowLink)
               .toList();
     }
