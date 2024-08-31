@@ -16,7 +16,7 @@ import java.util.List;
 public class  UserController {
     private final UserService userService;
 
-    @GetMapping(path = "")
+    @GetMapping(path = "all")
     public ResponseEntity<List<UserShow>> index() {
         List<UserShow> users = userService.getAll();
         return ResponseEntity
@@ -33,8 +33,14 @@ public class  UserController {
 
     @PostMapping(path = "")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserCreate save(@RequestBody UserCreate user) {
+    public UserCreate save(@ModelAttribute UserCreate user) {
         userService.save(user);
         return user;
+    }
+
+    @PostMapping(path = "login")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public UserShow login(@RequestBody String login) {
+        return userService.findByName(login);
     }
 }

@@ -32,4 +32,8 @@ public class UserService {
     public void save(UserCreate user) {
         userRepository.save(userMapper.toUser(user));
     }
+
+    public UserShow findByName(String login) {
+        return userMapper.toShowUser(userRepository.findByName(login));
+    }
 }
