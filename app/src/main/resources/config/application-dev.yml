@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/kit-short
+    url: jdbc:postgresql://localhost:5432/kit-short?ApplicationName=devApp
     username: postgres
     password: 12fvflteC
   jpa:

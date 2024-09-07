@@ -33,7 +33,9 @@ public class UserService {
         userRepository.save(userMapper.toUser(user));
     }
 
+    @Transactional
     public UserShow findByName(String login) {
+        // TODO если не нашёл вернуть ошибку, а не null
         return userMapper.toShowUser(userRepository.findByName(login));
     }
 }

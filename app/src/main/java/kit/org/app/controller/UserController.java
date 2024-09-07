@@ -1,6 +1,7 @@
 package kit.org.app.controller;
 
 import kit.org.app.dto.user.UserCreate;
+import kit.org.app.dto.user.UserLogin;
 import kit.org.app.dto.user.UserShow;
 import kit.org.app.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/users/")
 @RequiredArgsConstructor
+@CrossOrigin(maxAge = 3600)
 public class  UserController {
     private final UserService userService;
 
@@ -31,16 +33,15 @@ public class  UserController {
         return userService.getById(id);
     }
 
-    @PostMapping(path = "")
+    @PostMapping(path = "registration")
     @ResponseStatus(HttpStatus.CREATED)
-    public UserCreate save(@ModelAttribute UserCreate user) {
+    public UserCreate save(@RequestBody UserCreate user) {
         userService.save(user);
         return user;
     }
 
     @PostMapping(path = "login")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public UserShow login(@RequestBody String login) {
-        return userService.findByName(login);
+    public ResponseEntity<UserShow> login(@RequestBody UserLogin login) {
+        return ResponseEntity.ok().body(userService.findByName(login.name()));
     }
 }
