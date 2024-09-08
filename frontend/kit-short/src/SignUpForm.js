@@ -1,8 +1,7 @@
-// src/SignUpForm.js
 import React, { useState } from 'react';
 import './SignUpForm.css'; // Создадим файл для стилей, если необходимо
 
-const SignUpForm = () => {
+const SignUpForm = ({ onSwitch, onRegister }) => {
     const [name, setName] = useState('');
 
     const handleSubmit = (event) => {
@@ -28,6 +27,10 @@ const SignUpForm = () => {
         })
         .then(data => {
             console.log('Success:', data);
+
+            // Здесь передаем данные о пользователе в родительский компонент
+            onRegister(data); // Передача данных пользователя
+
         })
         .catch(error => {
             console.error('Error:', error);
@@ -52,15 +55,11 @@ const SignUpForm = () => {
                             onChange={(e) => setName(e.target.value)}
                             required
                         />
-                        {/* Поля email и password закомментированы, их можно восстановить при необходимости
-                        <label htmlFor="email">Email:</label>
-                        <input type="email" id="mail" name="user_email" required />
-
-                        <label htmlFor="password">Password:</label>
-                        <input type="password" id="password" name="user_password" required />
-                        */}
                     </fieldset>
                     <button type="submit">Sign Up</button>
+                    <p> Already have an account?{' '}
+                        <button type="button" onClick={onSwitch}>Login</button>
+                    </p>
                 </form>
             </div>
         </div>
