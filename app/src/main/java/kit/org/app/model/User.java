@@ -24,6 +24,7 @@ public class User {
     @GeneratedValue(strategy = IDENTITY)
     private Long id;
     private String name;
+    private String password;
     @OneToMany(mappedBy = "user", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private List<Link> links;
 }

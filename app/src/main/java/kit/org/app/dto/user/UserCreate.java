@@ -1,4 +1,4 @@
 package kit.org.app.dto.user;
 
-public record UserCreate(String name) {
+public record UserCreate(String name, String password) {
 }
