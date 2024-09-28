@@ -4,8 +4,10 @@ import jakarta.transaction.Transactional;
 import kit.org.app.dto.user.UserCreate;
 import kit.org.app.dto.user.UserShow;
 import kit.org.app.mapper.UserMapper;
+import kit.org.app.model.User;
 import kit.org.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,7 +37,10 @@ public class UserService {
 
     @Transactional
     public UserShow findByName(String login) {
-        // TODO если не нашёл вернуть ошибку, а не null
-        return userMapper.toShowUser(userRepository.findByName(login));
+        User user = userRepository.findByName(login);
+        if (user != null) {
+            return userMapper.toShowUser(user);
+        }
+        throw new UsernameNotFoundException("User '" + login + "' not found");
     }
 }
