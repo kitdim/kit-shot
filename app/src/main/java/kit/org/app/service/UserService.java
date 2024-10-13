@@ -4,15 +4,19 @@ import jakarta.transaction.Transactional;
 import kit.org.app.dto.user.UserCreate;
 import kit.org.app.dto.user.UserShow;
 import kit.org.app.mapper.UserMapper;
+import kit.org.app.model.User;
 import kit.org.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
@@ -33,9 +37,15 @@ public class UserService {
         userRepository.save(userMapper.toUser(user));
     }
 
+    @Override
     @Transactional
-    public UserShow findByName(String login) {
-        // TODO если не нашёл вернуть ошибку, а не null
-        return userMapper.toShowUser(userRepository.findByName(login));
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User '" + username + "' not found");
+        }
+        return org.springframework.security.core.userdetails.User.withUsername(user.getUsername())
+                .password(user.getPassword())
+                .build();
     }
 }

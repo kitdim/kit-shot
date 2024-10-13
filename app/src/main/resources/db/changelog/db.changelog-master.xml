@@ -11,4 +11,6 @@
              relativeToChangelogFile="true" />
     <include file="changesets/2024/08/20240820-update-table-link.xml"
              relativeToChangelogFile="true" />
+    <include file="changesets/2024/09/20240916-update-table-user.xml"
+             relativeToChangelogFile="true" />
 </databaseChangeLog>
