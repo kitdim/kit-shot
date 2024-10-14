@@ -28,9 +28,9 @@ public class LinkController {
 
     @PostMapping("{userId}/links/create")
     @ResponseStatus(HttpStatus.CREATED)
-    public void save(@RequestBody LinkCreate link) {
-        linkService.saveByUserId(link);
+    public void save(@PathVariable Long userId, @RequestBody LinkCreate link) {
+        linkService.saveByUserId(userId, link);
     }
-
+    // TODO userId никак не используется
     // todo написать точку входа для перехода по ссылке (сокращенная -> полная (должен осущетслвяться коррктный переход))
 }
