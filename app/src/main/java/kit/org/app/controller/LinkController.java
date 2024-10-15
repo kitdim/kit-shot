@@ -31,6 +31,5 @@ public class LinkController {
     public void save(@PathVariable Long userId, @RequestBody LinkCreate link) {
         linkService.saveByUserId(userId, link);
     }
-    // TODO userId никак не используется
     // todo написать точку входа для перехода по ссылке (сокращенная -> полная (должен осущетслвяться коррктный переход))
 }
