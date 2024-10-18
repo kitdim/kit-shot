@@ -35,6 +35,9 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .build();
     }
+    //todo на сваггер, все юзеры, конкретная ссылка, конкретный юзер, может зайти только Админ
+    //todo на вход и регистрацию доступ у всех
+    //todo на создание ссылки только у юзера
 
     @Bean
     public PasswordEncoder passwordEncoder() {
