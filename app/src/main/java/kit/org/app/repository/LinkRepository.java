@@ -11,4 +11,7 @@ import java.util.List;
 public interface LinkRepository extends JpaRepository<Link, Long> {
     @Query("SELECT l FROM Link l where l.user.id=?1")
     List<Link> findAllByUserId(Long userId);
+
+    @Query("SELECT l.originalName FROM Link l WHERE l.shortName=?1")
+    String findByShortName(String someShortUrl);
 }

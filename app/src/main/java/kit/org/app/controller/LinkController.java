@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("api/users/")
 @RequiredArgsConstructor
-@CrossOrigin(maxAge = 3600)
 public class LinkController {
     private final LinkService linkService;
 
@@ -31,5 +30,4 @@ public class LinkController {
     public void save(@PathVariable Long userId, @RequestBody LinkCreate link) {
         linkService.saveByUserId(userId, link);
     }
-    // todo написать точку входа для перехода по ссылке (сокращенная -> полная (должен осущетслвяться коррктный переход))
 }

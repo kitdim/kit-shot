@@ -31,4 +31,8 @@ public class LinkService {
         }
         linkRepository.save(linkMapper.toLink(linkCreate));
     }
+
+    public String getFullUrl(String someShortUrl) {
+        return linkRepository.findByShortName("http://localhost/" + someShortUrl);
+    }
 }
