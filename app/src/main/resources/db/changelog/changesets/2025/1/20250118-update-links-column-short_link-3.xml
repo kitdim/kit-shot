@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <changeSet id="18-01-2025-update-links-column-short_link" author="kitdim">
+        <sql>
+            drop table if exists temp_links;
+
+            create temporary table temp_links as
+            select id, short_name from links
+            where short_name not like '%localhost%';
+
+            update temp_links
+            set short_name = overlay(short_name placing 't' from 16 for 0);
+
+            update public.links
+            set short_name = temp_links.short_name
+            from temp_links
+            where public.links.id = temp_links.id;
+
+            drop table temp_links;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

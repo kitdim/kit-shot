@@ -13,4 +13,10 @@
              relativeToChangelogFile="true" />
     <include file="changesets/2024/09/20240916-update-table-user.xml"
              relativeToChangelogFile="true" />
+    <include file="changesets/2025/1/20250118-update-links-column-short_link.xml"
+             relativeToChangelogFile="true" />
+    <include file="changesets/2025/1/20250118-update-links-column-short_link-2.xml"
+             relativeToChangelogFile="true" />
+    <include file="changesets/2025/1/20250118-update-links-column-short_link-3.xml"
+             relativeToChangelogFile="true" />
 </databaseChangeLog>
