@@ -22,14 +22,13 @@ public class SecurityConfig {
             new AntPathRequestMatcher("/api/users/login"),
             new AntPathRequestMatcher("/v3/api-docs/**"),
             new AntPathRequestMatcher("/swagger-ui.html"),
-            new AntPathRequestMatcher("/swagger-ui/**"),
-            new AntPathRequestMatcher("/*/"));
+            new AntPathRequestMatcher("/swagger-ui/**"));
 
     public static final RequestMatcher CLOSE_URLS = new OrRequestMatcher(
             new AntPathRequestMatcher("/api/users/{number:[0-9]+}"), // nums seqs
             new AntPathRequestMatcher("/api/users/all"),
-            new AntPathRequestMatcher("{number:[0-9]+}/links"),
-            new AntPathRequestMatcher("{number:[0-9]+}/links/create"));
+            new AntPathRequestMatcher("/api/users/{number:[0-9]+}/links"),
+            new AntPathRequestMatcher("/api/users/{number:[0-9]+}/links/create"));
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -37,7 +36,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                                 .requestMatchers(PUBLIC_URLS).permitAll()
                                 .requestMatchers(CLOSE_URLS).authenticated()
-                                .anyRequest().authenticated()
+                                .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .httpBasic(Customizer.withDefaults())
